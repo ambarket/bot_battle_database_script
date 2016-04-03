@@ -23,21 +23,6 @@ DROP DATABASE IF EXISTS `bbweb`;
 CREATE DATABASE IF NOT EXISTS `bbweb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `bbweb`;
 
-DELIMITER $$
---
--- Functions
---
-DROP FUNCTION IF EXISTS `login`$$
-CREATE DEFINER=`bbweb`@`localhost` FUNCTION `login`(`acct` VARCHAR(30), `pwd` VARCHAR(32)) RETURNS int(11)
-    READS SQL DATA
-if exists(select * from users where account=acct and password=pwd)
-	then 
-		return (select uid from users where account=acct);
-	else 
-		return 0;
-end if$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
